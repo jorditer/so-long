@@ -1,0 +1,10 @@
+git clone https://github.com/aseprite/laf.git
+cd laf
+mkdir build
+cd build
+cmake -G Ninja \
+  -DLAF_BACKEND=~/deps/skia \
+  -DSKIA_DIR=~/skia \
+  -DSKIA_LIBRARY_DIR=~/deps/skia/out/Release \
+  ..
+ninja
