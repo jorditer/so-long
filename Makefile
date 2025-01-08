@@ -11,10 +11,10 @@ MLX_PATH = mlx_linux
 
 # Fixed linking command to use correct path and library name
 $(NAME): mlx $(OBJ)
-	$(CC) $(OBJ) -L$(MLX_PATH) -lmlx -L/usr/lib -I$(MLX_PATH) -lXext -lX11 -lm -lz -o $(NAME)
+	$(CC) -g $(OBJ) -L$(MLX_PATH) -lmlx_Linux -L/usr/lib -I$(MLX_PATH) -lXext -lX11 -lm -lz -o $(NAME)
 
-# mlx:
-# 	@make -C $(MLX_PATH)
+mlx:
+	@make -C $(MLX_PATH)
 
 clean:
 	rm -f $(OBJ)
