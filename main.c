@@ -109,11 +109,18 @@ int close_window(int keycode, t_vars *vars)
 int change_colors(t_vars *vars)
 {
     if (vars->color == 0xFF0000)
-        vars->color == 0x00FF00;
+        vars->color = 0x00FF00;
     else if (vars->color == 0x00FF00)
-        vars->color == 0x0000FF;
+        vars->color = 0x0000FF;
     else
-        (vars->color == 0xFF0000);
+        (vars->color = 0xFF0000);
+    mlx_clear_window(vars->mlx, vars->win);
+    draw_square(&vars->img, 300, 300, 500, vars->color);
+    printf("%d\n", vars->color);
+    mlx_put_image_to_window(vars->mlx, vars->win, vars->img.img, 0, 0);
+    usleep(500000);  // Add delay to see the color change effect
+    return (0);
+
 }
 
 int main(void)
@@ -125,8 +132,8 @@ int main(void)
     vars.img.img = mlx_new_image(vars.mlx, 1920, 1080);
     vars.img.addr = mlx_get_data_addr(vars.img.img, &vars.img.bits_per_pixel,
                                     &vars.img.line_length, &vars.img.endian);
-    int color = 0xFF0000;
-    draw_square(&vars.img, 300, 300, 500, color);
+    vars.color = 0xFF0000;
+    draw_square(&vars.img, 300, 300, 500, vars.color);
     mlx_put_image_to_window(vars.mlx, vars.win, vars.img.img, 0, 0);
     mlx_hook(vars.win, ON_KEYDOWN, 1L<<0, close_window, &vars); // close_window
     mlx_key_hook(vars.win, handle_movement, &vars);
