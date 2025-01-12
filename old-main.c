@@ -28,18 +28,6 @@ typedef struct s_vars {
     int     img_width;
     int     img_height;
 } t_vars;
-// typedef struct s_vars {
-//     void    *mlx;
-//     void    *win;
-//     t_data  img_1;
-//     t_data  img_C;
-//     t_data  img_E;
-//     t_data  img_P;
-//     t_data  img_0;
-//     int     color;
-//     int     img_width;
-//     int     img_height;
-// } t_vars;
 // For setting the player position for each keypress
 // int key_handler(int keycode, t_vars *vars)
 // {
@@ -67,6 +55,14 @@ int handle_movement(int keycode, t_vars *t_vars)
     return (0);
 }
 
+void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
+{
+	char	*dst;
+
+	dst = data->addr + (y * data->line_length + x * (data->bits_per_pixel / 8));
+	*(unsigned int*)dst = color;
+}
+
 void ft_put_pixel(t_data *data, int x, int y, int color)
 {
     char *pixel;
@@ -75,6 +71,22 @@ void ft_put_pixel(t_data *data, int x, int y, int color)
     {
         pixel = data->addr + (y * data->line_length + x * (data->bits_per_pixel / 8));
         *(unsigned int *)pixel = color;
+    }
+}
+// x & y maximum x and y location to print to
+void draw_square(t_data *img, int x, int y, int size, int color)
+{
+    int i, j;
+
+    // Loop through each row of the square
+    for (i = y; i < y + size; i++)
+    {
+        // Loop through each column of the square
+        for (j = x; j < x + size; j++)
+        {
+            // Draw each pixel of the square
+            ft_put_pixel(img, j, i, color);
+        }
     }
 }
 
@@ -96,6 +108,22 @@ int close_window(int keycode, t_vars *vars)
     exit(0);
 }
 
+int change_colors(t_vars *vars)
+{
+    if (vars->color == 0xFF0000)
+        vars->color = 0x00FF00;
+    else if (vars->color == 0x00FF00)
+        vars->color = 0x0000FF;
+    else
+        (vars->color = 0xFF0000);
+    mlx_clear_window(vars->mlx, vars->win);
+    draw_square(&vars->img, 300, 300, 500, vars->color);
+    // printf("%d\n", vars->color);
+    mlx_put_image_to_window(vars->mlx, vars->win, vars->img.img, 0, 0);
+    usleep(500000);  // Add delay to see the color change effect
+    return (0);
+
+}
 
 int main(void)
 {
@@ -109,10 +137,14 @@ int main(void)
     vars.img.addr = mlx_get_data_addr(vars.img.img, &vars.img.bits_per_pixel,
                                     &vars.img.line_length, &vars.img.endian);
     vars.color = 0xFF0000;
+    // draw_square(&vars.img, 300, 300, 500, vars.color);
     mlx_put_image_to_window(vars.mlx, vars.win, vars.img.img, 0, 0);
     mlx_put_image_to_window(vars.mlx, vars.win, vars.img.img, vars.img_width, 0);
     mlx_hook(vars.win, ON_KEYDOWN, 1L<<0, close_window, &vars); // close_window
+    // mlx_key_hook(vars.win, handle_movement, &vars);
+    // mlx_loop_hook(vars.mlx, change_colors, &vars);
     mlx_loop(vars.mlx);
     return (0);
 }
+// int mlx_hook(void *win_ptr, int x_event, int x_mask, int (*funct_ptr)(), void *param);
 
