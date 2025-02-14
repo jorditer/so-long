@@ -6,7 +6,7 @@
 /*   By: jordi <jordi@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/14 13:31:35 by jordi             #+#    #+#             */
-/*   Updated: 2025/02/14 17:17:05 by jordi            ###   ########.fr       */
+/*   Updated: 2025/02/14 17:21:45 by jordi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void    check_args(int argc, char **filename)
 	len = ft_strlen(filename[1]);
 	if (len < 5 || ft_strcmp(filename[1] + len - 4, ".ber") != 0)
 	{
-		write(2, "Error\nInvalid file extension\n", 28);
+		write(2, "Error\nInvalid file extension\n", 29);
 		exit(EXIT_FAILURE);
 	}
 }
@@ -37,7 +37,7 @@ void    get_map_size(t_map *map, char *file)
 	fd = open(file, O_RDONLY);
 	if (fd < 0)
 	{
-		write(2, "Error\nCannot open file\n", 22);
+		write(2, "Error\nCannot open file\n", 23);
 		exit(EXIT_FAILURE);
 	}
 	map->width = 0;
@@ -52,7 +52,7 @@ void    get_map_size(t_map *map, char *file)
 			map->width = line_len;
 		else if (line_len != map->width)
 		{
-			write(2, "Error\nMap is not rectangular\n", 28);
+			write(2, "Error\nMap is not rectangular\n", 29);
 			exit(EXIT_FAILURE);
 		}
 		map->height++;
@@ -99,7 +99,7 @@ void    check_walls(t_map *map)
 			if ((i == 0 || i == map->height - 1 || j == 0 
 				|| j == map->width - 1) && map->grid[i][j] != '1')
 			{
-				write(2, "Error\nMap is not surrounded by walls\n", 36);
+				write(2, "Error\nMap is not surrounded by walls\n", 37);
 				exit(EXIT_FAILURE);
 			}
 			j++;
@@ -134,14 +134,14 @@ void    check_components(t_map *map)
 				map->exit_count++;
 			else if (map->grid[i][j] != '0' && map->grid[i][j] != '1')
 			{
-				write(2, "Error\nInvalid character in map\n", 30);
+				write(2, "Error\nInvalid character in map\n", 31);
 				exit(EXIT_FAILURE);
 			}
 		}
 	}
 	if (map->player_count != 1 || map->exit_count != 1 || map->collect_count < 1)
 	{
-		write(2, "Error\nInvalid number of components\n", 34);
+		write(2, "Error\nInvalid number of components\n", 35);
 		exit(EXIT_FAILURE);
 	}
 }
