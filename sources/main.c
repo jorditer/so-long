@@ -6,7 +6,7 @@
 /*   By: jordi <jordi@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/14 15:24:05 by jordi             #+#    #+#             */
-/*   Updated: 2025/02/14 17:15:16 by jordi            ###   ########.fr       */
+/*   Updated: 2025/02/14 19:07:47 by jordi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,8 +87,8 @@ int main(int argc, char **argv)
 
     char *path = "./test.xpm";
 
-	check_args(argc, argv);
-    map = validate_map(argv[1]);
+	// check_args(argc, argv);
+    // map = validate_map(argv[1]);
     vars.mlx = mlx_init();
     if (!vars.mlx)
         return (EXIT_FAILURE);

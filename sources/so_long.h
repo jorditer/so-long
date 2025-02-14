@@ -53,6 +53,8 @@ void    get_map_size(t_map *map, char *file);
 void    read_map(t_map *map, char *file);
 void    check_walls(t_map *map);
 void    check_components(t_map *map);
+static void	process_line(t_map *map, char *line);
+static void	count_component(t_map *map, char c, int i, int j);
 // path_validation.c
 t_map   *validate_map(char *file);
 static void flood_fill(char **map, int x, int y, int *collect_count);
