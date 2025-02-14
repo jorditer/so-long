@@ -6,7 +6,7 @@
 /*   By: jordi <jordi@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/14 13:31:35 by jordi             #+#    #+#             */
-/*   Updated: 2025/02/14 17:21:45 by jordi            ###   ########.fr       */
+/*   Updated: 2025/02/14 17:33:15 by jordi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,6 @@ void    get_map_size(t_map *map, char *file)
 		int line_len = ft_strlen(line);
 		if (line[line_len - 1] == '\n')
 			line_len--;
-			
 		if (map->width == 0)
 			map->width = line_len;
 		else if (line_len != map->width)
