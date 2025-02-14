@@ -6,7 +6,7 @@
 /*   By: jordi <jordi@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/14 15:24:05 by jordi             #+#    #+#             */
-/*   Updated: 2025/02/14 16:13:05 by jordi            ###   ########.fr       */
+/*   Updated: 2025/02/14 17:15:16 by jordi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ void ft_put_pixel(t_data *data, int x, int y, int color)
 }
 
 
-int main(void)
+int main(int argc, char **argv)
 {
     t_vars  vars;
     t_map *map;
@@ -87,7 +87,8 @@ int main(void)
 
     char *path = "./test.xpm";
 
-    map = validate_map("./test.ber");
+	check_args(argc, argv);
+    map = validate_map(argv[1]);
     vars.mlx = mlx_init();
     if (!vars.mlx)
         return (EXIT_FAILURE);

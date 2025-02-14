@@ -6,7 +6,7 @@
 /*   By: jordi <jordi@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/14 16:41:40 by jordi             #+#    #+#             */
-/*   Updated: 2025/02/14 17:02:19 by jordi            ###   ########.fr       */
+/*   Updated: 2025/02/14 17:15:01 by jordi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,6 @@ t_map   *validate_map(char *file)
 {
 	t_map   *map;
 	
-	check_extension(file);
 	map = malloc(sizeof(t_map));
 	if (!map)
 		exit(EXIT_FAILURE);

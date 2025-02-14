@@ -6,21 +6,27 @@
 /*   By: jordi <jordi@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/14 13:31:35 by jordi             #+#    #+#             */
-/*   Updated: 2025/02/14 17:00:25 by jordi            ###   ########.fr       */
+/*   Updated: 2025/02/14 17:17:05 by jordi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-void	check_args(int argc, char **argv)
+void    check_args(int argc, char **filename)
 {
-	int	map_len;
-
+	int len;
+	
 	if (argc != 2)
-		ft_error("Invalid number of arguments.");
-	map_len = ft_strlen(argv[1]);
-	if (map_len < 5 || ft_strnstr(&argv[1][map_len - 4], ".ber", 4) == NULL)
-		ft_error("Invalid map extension.");
+	{
+		write(2, "Error\nInvalid number of argumens\n", 34);
+		exit(EXIT_FAILURE);
+	}
+	len = ft_strlen(filename[1]);
+	if (len < 5 || ft_strcmp(filename[1] + len - 4, ".ber") != 0)
+	{
+		write(2, "Error\nInvalid file extension\n", 28);
+		exit(EXIT_FAILURE);
+	}
 }
 
 void    get_map_size(t_map *map, char *file)

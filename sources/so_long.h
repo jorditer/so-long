@@ -48,7 +48,7 @@ typedef struct s_vars {
 } t_vars;
 
 // map_validation.c
-void    check_extension(char *filename);
+void	check_args(int argc, char **argv);
 void    get_map_size(t_map *map, char *file);
 void    read_map(t_map *map, char *file);
 void    check_walls(t_map *map);
